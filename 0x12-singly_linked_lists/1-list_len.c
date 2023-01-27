@@ -14,7 +14,6 @@ size_t list_len(const list_t *h)
 
 	if (h == NULL)
 	{
-		printf("Error\n");
 		return (1);
 	}
 
