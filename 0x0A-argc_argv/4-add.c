@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include <string.h>
 
 /**
  * main - adds two numbers
@@ -11,22 +11,29 @@
  */
 int main(int argc, char *argv[])
 {
-	if (argc == 3)
+	if (argc >= 3)
 	{
-		int var_a = atoi(argv[1]);
-		int var_b = atoi(argv[2]);
-		int total;
+/*		char *str[50];*/
+		int i = 1;
+		int total = 0;
 
-		if (isdigit(*argv[1]) && isdigit(*argv[2]))
+		while (i < argc)
 		{
-			total = var_a + var_b;	
-			printf("%d\n", total);
+			
+			if (1)
+			{
+				total += atoi(argv[i]);
+			}
+			else
+			{
+				printf("Error\n");
+				exit(EXIT_FAILURE);
+			}
+
+			i++;
 		}
-		else
-		{
-			printf("Error\n");
-			exit(EXIT_FAILURE);
-		}
+		
+		printf("%d\n", total);	
 	}
 	else
 	{
