@@ -13,12 +13,8 @@
 list_t *add_node_end(list_t **head, const char *str)
 {
 	list_t *new;
+	list_t **l_ptr;
 	size_t n;
-
-	if (str == NULL)
-	{
-		return (NULL);
-	}
 
 	new = malloc(sizeof(list_t));
 
@@ -43,5 +39,17 @@ list_t *add_node_end(list_t **head, const char *str)
 		n++;
 	}
 
-	return (traverse(head, new, n));
+	l_ptr = head;
+
+	
+	while (*l_ptr != NULL)
+	{
+		l_ptr = &(*l_ptr)->next;
+	}
+
+	new->len = n;
+	new->next = *l_ptr;
+	*l_ptr = new;
+
+	return (*l_ptr);;
 }

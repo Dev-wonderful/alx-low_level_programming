@@ -19,20 +19,7 @@ size_t print_list(const list_t *h);
 size_t list_len(const list_t *h);
 list_t *add_node(list_t **head, const char *str);
 list_t *add_node_end(list_t **head, const char *str);
-
-list_t *traverse(list_t **l_ptr, list_t *new_n, size_t n)
-{
-	while (*l_ptr != NULL)
-	{
-		l_ptr = &(*l_ptr)->next;
-	}
-
-	new_n->len = n;
-	new_n->next = *l_ptr;
-	*l_ptr = new_n;
-
-	return (*l_ptr);
-}
+void free_list(list_t *head);
 
 
 #endif /* _LISTS_H_ */
