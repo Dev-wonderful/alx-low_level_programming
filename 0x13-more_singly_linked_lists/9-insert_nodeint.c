@@ -19,14 +19,14 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	prev = head;
 	curr = *prev;
 
-	if (*head == NULL)
+	if (*head == NULL || head == NULL)
 	{
 		return (NULL);
 	}
 
 	while (i != idx)
 	{
-		if ((curr->next == NULL) && (idx - i == 1))
+		if (curr->next == NULL && idx - i == 1)
 		{
 			add_nodeint_end(head, n);
 		}
