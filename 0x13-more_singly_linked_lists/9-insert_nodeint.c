@@ -1,0 +1,43 @@
+#include <stdlib.h>
+#include "lists.h"
+
+/**
+ * insert_nodeint_at_index - the sum of data of a listint_t list
+ * @head: double pointer to a listint_t list head node
+ * @idx: index point to insert new node
+ * @n: data for the new node
+ *
+ * Return: address of new node or NULL if it fails
+ */
+listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
+{
+	unsigned int i = 0;
+	listint_t **prev;
+	listint_t *curr;
+	listint_t *new;
+
+	prev = head;
+	curr = *prev;
+
+	if (*head == NULL)
+	{
+		return (NULL);
+	}
+
+	while (i != idx)
+	{
+		if (curr->next == NULL)
+		{
+			return (NULL);	
+		}
+		prev = &curr->next;
+		curr = curr->next;
+		i++;
+	}
+	new = malloc(sizeof(listint_t));
+	new->n = n;
+	new->next = curr;
+	*prev = new;
+
+	return (new);
+}
