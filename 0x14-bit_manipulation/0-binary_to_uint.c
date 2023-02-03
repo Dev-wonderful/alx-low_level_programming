@@ -11,7 +11,7 @@
 unsigned int binary_to_uint(const char *b)
 {
 	int i = 0, j = 0, h, pow, digit;
-	unsigned int uint;
+	unsigned int uint = 0;
 	char p[] = "";
 
 	if (b == NULL)
@@ -22,15 +22,13 @@ unsigned int binary_to_uint(const char *b)
 		if (!isdigit(b[i++]))
 			return (0);
 	}
-	uint = 0;
 	i = i - 1;
-
 	while (i >= 0)
 	{
 		pow = 2;
-		p[0] = b[i];
+		p[0] = b[i--];
 		digit = atoi(p);
-		h = j;
+		h = j++;
 		if (h == 0)
 		{
 			pow = 1;
@@ -48,9 +46,6 @@ unsigned int binary_to_uint(const char *b)
 			}
 		}
 		uint += (pow * digit);
-		j++;
-		i--;
 	}
-
 	return (uint);
 }
