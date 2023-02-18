@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdint.h>
 
 /**
  * cp - copies text from file 1 to file 2
@@ -14,17 +15,21 @@ int cp(const char *file_from, const char *file_to)
 {
 	int fd_from, fd_to, err_close;
 	ssize_t wr, len;
-	char buf[1024];
+	char *buf;
 
 	fd_from = open(file_from, O_RDONLY);
-	len = read(fd_from, buf, 1024);
+	buf = malloc(sizeof(char) * 1024);
+	if (buf == NULL)
+		return (-1);
+	len = read(fd_from, buf, SIZE_MAX);
 	if (len < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98);
 	}
-	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0664);
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	wr = write(fd_to, buf, len);
+	free(buf);
 	if (wr < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
