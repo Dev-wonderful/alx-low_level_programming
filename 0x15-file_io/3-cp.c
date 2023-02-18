@@ -18,10 +18,10 @@ int cp(const char *file_from, const char *file_to)
 	char *buf;
 
 	fd_from = open(file_from, O_RDONLY);
-	buf = malloc(sizeof(char) * 1024);
+	buf = malloc(sizeof(char) * 5120);
 	if (buf == NULL)
 		return (-1);
-	len = read(fd_from, buf, SIZE_MAX);
+	len = read(fd_from, buf, 5120);
 	if (len < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
