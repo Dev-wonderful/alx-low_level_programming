@@ -18,6 +18,11 @@ int cp(const char *file_from, const char *file_to)
 	char *buf;
 
 	fd_from = open(file_from, O_RDONLY);
+	if (fd_from < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
+		exit(98);
+	}
 	buf = malloc(sizeof(char) * 5120);
 	if (buf == NULL)
 		return (-1);
@@ -27,7 +32,7 @@ int cp(const char *file_from, const char *file_to)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98);
 	}
-	fd_to = open(file_to, O_RDWR | O_CREAT | O_TRUNC, 0664);
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	wr = write(fd_to, buf, len);
 	free(buf);
 	if (wr < 0)
