@@ -20,10 +20,10 @@ int cp(const char *file_from, const char *file_to)
 	len = read(fd_from, buf, 1024);
 	if (len < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from %s\n", file_from);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98);
 	}
-	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0664);
 	wr = write(fd_to, buf, len);
 	if (wr < 0)
 	{
