@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdint.h>
-#include <errno.h>
 
 /**
  * cp - copies text from file 1 to file 2
@@ -19,10 +18,16 @@ int cp(const char *file_from, const char *file_to)
 	char *buf;
 
 	fd_from = open(file_from, O_RDONLY);
-	if (fd_from < 0 || errno == ENOENT)
+	if (fd_from < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98);
+	}
+	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
+	if (fd_to < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
+		exit(99);
 	}
 	buf = malloc(sizeof(char) * 5120);
 	if (buf == NULL)
@@ -33,7 +38,6 @@ int cp(const char *file_from, const char *file_to)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98);
 	}
-	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
 	wr = write(fd_to, buf, len);
 	free(buf);
 	if (wr < 0)
