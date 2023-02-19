@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdint.h>
+#include <errno.h>
 
 /**
  * cp - copies text from file 1 to file 2
