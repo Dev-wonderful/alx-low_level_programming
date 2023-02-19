@@ -5,6 +5,29 @@
 #include <stdint.h>
 
 /**
+ * err_handler - check if error has occured, then terminate
+ * @file_from: file one
+ * @file_to: file two
+ * @f_name: name of file one
+ * @t_name: name of file two
+ *
+ * Return: nothing
+ */
+void err_handler(int file_from, int file_to, char *f_name, char *t_name)
+{
+	if (file_from < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", f_name);
+		exit(98);
+	}
+	if (file_to < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", t_name);
+		exit(99);
+	}
+}
+
+/**
  * cp - copies text from file 1 to file 2
  * @file_from: the file to be copied
  * @file_to: the being copied into
@@ -13,46 +36,26 @@
  */
 int cp(const char *file_from, const char *file_to)
 {
-	int fd_from, fd_to, err_close;
+int fd_from, fd_to;
 	ssize_t wr, len;
 	char *buf;
 
 	fd_from = open(file_from, O_RDONLY);
-	if (fd_from < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
-		exit(98);
-	}
 	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
-	if (fd_to < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
-		exit(99);
-	}
-	buf = malloc(sizeof(char) * 5120);
+	err_handler(fd_from, fd_to, file_from, file_to);
+	buf = malloc(sizeof(char) * 5120)
 	if (buf == NULL)
 		return (-1);
-	len = read(fd_from, buf, 5120);
-	if (len < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
-		exit(98);
-	}
+	len = read(fd_from, buf, 5120)
 	wr = write(fd_to, buf, len);
+	err_handler(len, wr, file_from, file_to);
 	free(buf);
-	if (wr < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
-		exit(99);
-	}
-	err_close = close(fd_from);
-	if (err_close < 0)
+	if ((close(fd_from)) < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
 		exit(100);
 	}
-	err_close = close(fd_to);
-	if (err_close < 0)
+	if ((close(fd_to)) < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
 		exit(100);
