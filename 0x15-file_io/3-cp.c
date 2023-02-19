@@ -18,7 +18,7 @@ int cp(const char *file_from, const char *file_to)
 	char *buf;
 
 	fd_from = open(file_from, O_RDONLY);
-	if (fd_from < 0)
+	if (fd_from < 0 || errno == ENOENT)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98);
@@ -27,7 +27,7 @@ int cp(const char *file_from, const char *file_to)
 	if (buf == NULL)
 		return (-1);
 	len = read(fd_from, buf, 5120);
-	if (len == 0)
+	if (len < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98);
