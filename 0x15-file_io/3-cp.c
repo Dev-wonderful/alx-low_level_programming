@@ -13,16 +13,16 @@
  *
  * Return: nothing
  */
-void err_handler(int file_from, int file_to, char *f_name, char *t_name)
+void err_handler(int file_from, int file_to, const char *f_n, const char *t_n)
 {
 	if (file_from < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", f_name);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", f_n);
 		exit(98);
 	}
 	if (file_to < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", t_name);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", t_n);
 		exit(99);
 	}
 }
@@ -43,10 +43,10 @@ int fd_from, fd_to;
 	fd_from = open(file_from, O_RDONLY);
 	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
 	err_handler(fd_from, fd_to, file_from, file_to);
-	buf = malloc(sizeof(char) * 5120)
+	buf = malloc(sizeof(char) * 5120);
 	if (buf == NULL)
 		return (-1);
-	len = read(fd_from, buf, 5120)
+	len = read(fd_from, buf, 5120);
 	wr = write(fd_to, buf, len);
 	err_handler(len, wr, file_from, file_to);
 	free(buf);
