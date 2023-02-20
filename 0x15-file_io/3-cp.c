@@ -8,8 +8,8 @@
  * err_handler - check if error has occured, then terminate
  * @file_from: file one
  * @file_to: file two
- * @f_name: name of file one
- * @t_name: name of file two
+ * @f_n: name of file one
+ * @t_n: name of file two
  *
  * Return: nothing
  */
