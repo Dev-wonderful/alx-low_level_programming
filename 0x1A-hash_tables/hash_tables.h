@@ -3,7 +3,7 @@
 
 /**
  * struct hash_node_s - node of a hash table
- * 
+ *
  * @key: The key, string
  * The key is unique in the Hash table
  * @value: The value corresponding to a key
@@ -13,7 +13,7 @@ typedef struct hash_node_s
 {
 	char *key;
 	char *value;
-	struct hash_node_s *next;	
+	struct hash_node_s *next;
 } hash_node_t;
 
 /**
