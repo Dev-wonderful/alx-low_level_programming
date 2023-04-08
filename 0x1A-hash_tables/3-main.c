@@ -14,7 +14,7 @@ int main(void)
 	    int good;
 
 	        ht = hash_table_create(1024);
-		   good =  hash_table_set(ht, "betty", "cool");
+		   good =  hash_table_set(ht, "betty", "is soooo cooool");
 		    if (good == 1)
 			    printf("Worked!\n");
 
