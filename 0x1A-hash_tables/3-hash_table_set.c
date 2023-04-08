@@ -3,12 +3,12 @@
 #include "hash_tables.h"
 
 /**
- * hash_table_set - adds an element to the hash table
+ * hash_table_set - adds/updates a key-value pair in the hash table
  * @ht: the hash table to be updated
  * @key: the key for the value
  * @value: the value being mapped
  *
- * Return: 1 for success, 0 for erro
+ * Return: 1 for success, 0 for error
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
@@ -24,6 +24,10 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	}
 	index = key_index((const unsigned char *)key, ht->size);
+	if (ht->array[index]->key == key)
+	{
+		ht->array[index]->value = strdup(value);
+	}
 	new = malloc(sizeof(hash_node_t));
 	if (new == NULL)
 		return (0);
