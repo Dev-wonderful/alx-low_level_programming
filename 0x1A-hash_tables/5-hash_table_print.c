@@ -1,5 +1,4 @@
 #include "hash_tables.h"
-#define SIZE 1024
 
 /**
  * hash_table_print - print a hash table
@@ -20,7 +19,7 @@ void hash_table_print(const hash_table_t *ht)
 
 	sep = "";
 	printf("{");
-	for (index = 0; index < SIZE; index++)
+	for (index = 0; index < ht->size; index++)
 	{
 		tmp = ht->array[index];
 		while (tmp != NULL)
