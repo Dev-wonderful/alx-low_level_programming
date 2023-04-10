@@ -5,7 +5,7 @@
  * hash_table_print - print a hash table
  * @ht: the hash table to be printed
  *
- * Description: prints the key/value in the order that they 
+ * Description: prints the key/value in the order that they
  * appear in the array of hash table
  * Return: Nothing
  */
