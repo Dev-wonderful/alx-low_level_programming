@@ -7,7 +7,7 @@ def island_perimeter(grid):
     length = len(grid) - 2
     width = len(grid[0]) - 2
     perimeter = length * width
-    if perimeter <= 0:
-        return 0
+    if perimeter < 0:
+        return
     else:
         return perimeter
