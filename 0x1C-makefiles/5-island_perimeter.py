@@ -5,7 +5,7 @@
 def island_perimeter(grid):
     """calculate the perimeter of an island"""
     lake = True
-    while lake:
+    if lake and len(grid) > 2:
         island = grid[1:-1]
         length = len(island)
         border1 = grid[1]
