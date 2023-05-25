@@ -15,7 +15,6 @@ def island_perimeter(grid):
         border = border1[1:-1] + border2[1:-1] + border3 + border4
         for cell in border:
             if cell == 0:
-                print("better error")
                 lake = False
                 break
         if lake:
