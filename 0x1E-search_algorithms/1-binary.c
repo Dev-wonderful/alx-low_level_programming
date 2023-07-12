@@ -12,6 +12,12 @@ int binary_search(int *array, size_t size, int value)
 {
 	size_t start, mid, end, i;
 
+<<<<<<< HEAD
+=======
+	if (array == NULL)
+		return (-1);
+
+>>>>>>> f2cf163ebee98afdccc293146aaea8dcbc663e6b
 	start = 0;
 	end = size - 1;
 	while (start <= end)
@@ -36,8 +42,12 @@ int binary_search(int *array, size_t size, int value)
 			return (mid);
 		}
 	}
+<<<<<<< HEAD
 	if (value == array[mid])
 		return (mid);
 	else
 		return (-1);
+=======
+	return (-1);
+>>>>>>> f2cf163ebee98afdccc293146aaea8dcbc663e6b
 }
